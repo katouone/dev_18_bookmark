@@ -2,7 +2,16 @@
 
 require_once('funcs.php');
 
-//1.  DB接続します
+//POSTデータ(検索値)取得
+$name = $_POST['name'];
+$country = $_POST['country'];
+// $scene = $_POST['scene'];
+// $type = $_POST['type'];
+// $content = $_POST['content'];
+// $url = $_POST['url'];
+
+
+//DB接続
 try {
   //Password:MAMP='root',XAMPP=''
   $pdo = new PDO('mysql:dbname=php02_kadai;charset=utf8;host=localhost','root','root');
@@ -10,11 +19,17 @@ try {
   exit('DBConnectError'.$e->getMessage());
 }
 
-//２．データ取得SQL作成
-$stmt = $pdo->prepare("SELECT* FROM php02_needs_table");
+//データ取得SQL作成
+$stmt = $pdo->prepare("SELECT* FROM php02_needs_table WHERE name = :name OR country = :country");
+
+// バインド変数を用意
+$stmt->bindValue(':name', $name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':country', $country, PDO::PARAM_STR);
+
+//実行
 $status = $stmt->execute();
 
-//３．データ表示
+//データ表示
 // $view="";
 $view2=[];
 if ($status==false) {
@@ -43,7 +58,7 @@ if ($status==false) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>一覧表示</title>
+<title>検索表示</title>
 <!-- <link rel="stylesheet" href="css/range.css">
 <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 <style>
@@ -78,7 +93,7 @@ table th {
 <body id="main">
 <!-- Head[Start] -->
 <header>
-  <h2 class="title">データ一覧</h2>
+  <h2 class="title">検索結果</h2>
 </header>
 <!-- Head[End] -->
 
@@ -110,11 +125,11 @@ table th {
       <td class="table_content"><?php echo h($view2[$j]['content']); ?></td>
       <td>
         <?php 
-            if(h($view2[$j]['url']=='')){
-              echo '';
-            }else{
-              echo '<a href='.h($view2[$j]['url']).' target="_blank">Link</a>'; 
-            }
+          if(h($view2[$j]['url']=='')){
+            echo '';
+          }else{
+            echo '<a href='.h($view2[$j]['url']).' target="_blank">Link</a>'; 
+          }
         ?>
       </td>
       <td><?php echo h($view2[$j]['indate']); ?></td>
@@ -124,19 +139,7 @@ table th {
   ?>
 </table>
 
-
-<form method="post" action="search.php">
-  <div class="jumbotron">
-    <fieldset>
-      <legend>検索</legend>
-        <label>記入者名：<input type="text" name="name"></label><br>
-        <label>国・地域名：<input type="text" name="country"></label><br>
-        <input type="submit" value="検索">
-    </fieldset>
-  </div>
-</form>
-
-
+<div><a href="select.php">データ一覧へ</a></div>
 <div><a href="index.php">データ登録へ</a></div>
 
 <!-- Main[End] -->

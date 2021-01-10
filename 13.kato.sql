@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost:3306
--- 生成日時: 2021 年 1 月 08 日 23:04
+-- 生成日時: 2021 年 1 月 10 日 03:38
 -- サーバのバージョン： 5.7.30
 -- PHP のバージョン: 7.4.9
 
@@ -38,7 +38,9 @@ CREATE TABLE `php02_needs_table` (
 INSERT INTO `php02_needs_table` (`id`, `name`, `country`, `scene`, `type`, `content`, `url`, `indate`) VALUES
 (1, 'AAA', 'マラウィ', '医療', '困りごと', '病院内にどのような部署があるのかわからない', 'https://world-diary.jica.go.jp/sunadasachie/activity/post_1.php', '2021-01-09 06:29:07'),
 (2, 'AAA', 'マラウィ', '医療', '驚いたこと', '病棟は部門によってはかなり近代的で、冷蔵庫が設置されている病棟も少なくない。透析室もあり、癌化学療法も行われている。', 'https://world-diary.jica.go.jp/sunadasachie/activity/post_1.php', '2021-01-09 06:59:56'),
-(3, 'BBB', 'マラウィ', '医療', '困りごと', 'ベッドも日本のように決まっておらず、小児病棟では1つのベッドに赤ちゃんが3人寝ていることは普通', 'https://world-diary.jica.go.jp/sunadasachie/activity/post_1.php', '2021-01-09 07:21:23');
+(3, 'BBB', 'マラウィ', '医療', '困りごと', 'ベッドも日本のように決まっておらず、小児病棟では1つのベッドに赤ちゃんが3人寝ていることは普通', 'https://world-diary.jica.go.jp/sunadasachie/activity/post_1.php', '2021-01-09 07:21:23'),
+(4, 'CCC', 'ガーナ', '街中', '驚いたこと', '近代的なスーパーマーケットがあった', '', '2021-01-10 12:21:59'),
+(5, 'ABC', 'ブラジル', '街中', '驚いたこと', '', '', '2021-01-10 12:36:47');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -58,4 +60,4 @@ ALTER TABLE `php02_needs_table`
 -- テーブルのAUTO_INCREMENT `php02_needs_table`
 --
 ALTER TABLE `php02_needs_table`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
